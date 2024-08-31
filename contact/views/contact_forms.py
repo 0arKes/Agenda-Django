@@ -64,3 +64,21 @@ def update(request, contact_id):
         'contact/create.html',
         context,
     )
+
+
+def delete(request, contact_id):
+    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+    
+    confirm = request.POST.get('confirm', 'n')
+    if confirm == 'y':
+        contact.delete()
+        return redirect('contact:index')
+    
+    return render(
+        request,
+        'contact/contact.html',
+        {
+            'contact':contact,
+            'confirm':confirm,
+        }
+    )
