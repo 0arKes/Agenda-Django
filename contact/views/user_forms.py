@@ -59,7 +59,4 @@ def update_view(request):
                     {'form':form}
                     )
     form.save()
-    return render(request,
-                    'contact/register.html',
-                    {'form':form}
-                    )
+    return redirect("contact:user_update")
